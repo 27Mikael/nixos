@@ -22,6 +22,7 @@
     # # "Hello, world!" when run.
     # pkgs.hello
 
+
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -68,8 +69,21 @@
   #  /etc/profiles/per-user/harbinger/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    # EDITOR = "nvim";
   };
+
+  programs.zsh = {
+	enable = true;
+  };
+
+  programs.neovim = {
+  	enable = true;
+
+	viAlias = true;
+	vimAlias = true;
+	vimdiffAlias = true;
+  };
+  programs.ghostty.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
