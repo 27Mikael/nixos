@@ -3,21 +3,24 @@
 
   inputs = {
     # Nixppkgs 
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-24.11";
 
     # Home-manager
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: @ inputs: let
-    inherit (self) outputs;
+  outputs = { self, nixpkgs, home-manager, ... }:
+  let
+   lib = nixpkgs.lib;
+   system = "x86_64-linux";
+   pkgs = nixpkgs.legacyPackages.${system};
   in  {
      # nixos configuration entry point
      # 'nixos-rebuild --flake .#hosthame'
      nixosConfigurations = {
-      harbinger = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs outputs;};
+      harbinger = lib.nixosSystem {
+          inherit system;
           # main configuration file  
           modules = [./configuration.nix]; 
       };
@@ -25,10 +28,9 @@
 
     # standalone home-manager entry point
     # 'home-manager --flake .#hosthame@hostname'
-    homeConfigurations {
+    homeConfigurations = {
       harbinger = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyharbingeharbinger       
-        specialArgs = {inherit inputs outputs;};
+      	inherit pkgs;
         # home-manager configuration file
         modules = [./home.nix];
       };
