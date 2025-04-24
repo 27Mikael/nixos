@@ -91,14 +91,18 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   
+  obsidian 
   ntfs3g
+  brave
   wget
 
   # tools for dev
   oh-my-zsh
   ghostty
+  zellij
   vscode
   neovim
+  xclip
   git
   zsh
   ];
