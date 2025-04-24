@@ -4,5 +4,6 @@
  imports = [
   ./c.nix
   ./python3.nix
+  ./node.nix
   ];
 }

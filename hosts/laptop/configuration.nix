@@ -8,9 +8,11 @@
   imports =
     [ 
     # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../modules/languages/default.nix
-      ];
+    ./hardware-configuration.nix
+
+    # Import programming language dependencies
+    ../../modules/languages/default.nix
+    ];
 
   # Enable flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -77,12 +79,6 @@
     isNormalUser = true;
     description = "harbinger";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ghostty
-    neovim
-    git
-    ];
   };
 
   # Install firefox.
@@ -94,8 +90,17 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  wget
+  
   ntfs3g
+  wget
+
+  # tools for dev
+  oh-my-zsh
+  ghostty
+  vscode
+  neovim
+  git
+  zsh
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
