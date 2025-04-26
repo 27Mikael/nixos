@@ -1,6 +1,7 @@
 {
-  import = [
-  ./zellij.nix
+  imports = [
   ./ghostty.nix
+  ./zellij.nix
+  ./zsh.nix
   ];
 }

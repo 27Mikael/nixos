@@ -27,7 +27,7 @@
     };
 
     # standalone home-manager entry point
-    # 'home-manager --flake .#hosthame@hostname'
+    # 'home-manager switch'
     homeConfigurations = {
       harbinger = home-manager.lib.homeManagerConfiguration {
       	inherit pkgs;

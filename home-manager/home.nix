@@ -6,6 +6,10 @@
   home.username = "harbinger";
   home.homeDirectory = "/home/harbinger";
 
+  imports = [
+  ../modules/terminal/default.nix
+  ];
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -71,19 +75,6 @@
   home.sessionVariables = {
     # EDITOR = "nvim";
   };
-
-  programs.zsh = {
-	enable = true;
-  };
-
-  programs.neovim = {
-  	enable = true;
-
-	viAlias = true;
-	vimAlias = true;
-	vimdiffAlias = true;
-  };
-  programs.ghostty.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

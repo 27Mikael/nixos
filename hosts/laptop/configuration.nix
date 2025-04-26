@@ -94,6 +94,7 @@
   obsidian 
   ntfs3g
   brave
+  unzip
   wget
 
   # tools for dev
