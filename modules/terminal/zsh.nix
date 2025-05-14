@@ -6,7 +6,10 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+
+      vi = "nvim";
       ll = "ls -l";
+      rebuild = "sudo nixos-rebuild switch --flake .#harbinger";
     };
 
     history.size = 2000;
@@ -16,8 +19,8 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = ["git"];
-      theme = "jonathan";  
+      plugins = ["git" "direnv"];
+      theme = "powerlevel10k";  
     };
   };
 }

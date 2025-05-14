@@ -19,12 +19,28 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
+  nixpkgs.config.allowUnfree = true;
+
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = [
+          pkgs.gnomeExtensions.blur-my-shell.extensionUuid
+          pkgs.gnomeExtensions.worksets.extensionUuid
+        ];
+      };
+    };
+  };
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
+    obsidian
 
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -44,6 +60,11 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    # manage neovim config
+    ".config/nvim" = {
+      source = ../../../home/harbinger/.config/nvim;
+      recursive = true;
+    };
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.

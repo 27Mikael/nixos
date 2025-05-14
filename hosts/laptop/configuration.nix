@@ -6,16 +6,20 @@
 
 {
   imports =
-    [ 
+  [ 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
     # Import programming language dependencies
-    ../../modules/languages/default.nix
-    ];
+    # ../../modules/devshells/default.nix
+
+    # configuration for xserver
+    ../../modules/desktop/gnome.nix
+  ];
 
   # Enable flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -36,19 +40,6 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_ZA.UTF-8";
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "za";
-    variant = "";
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -68,9 +59,6 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Allowed nix users
   nix.settings.allowed-users = ["@wheel"];
 
@@ -80,9 +68,10 @@
     description = "harbinger";
     extraGroups = [ "networkmanager" "wheel" ];
   };
-
-  # Install firefox.
-  programs.firefox.enable = true;
+ 
+  # setting up direnv
+  programs.direnv.nix-direnv.enable = true;
+  programs.direnv.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -90,9 +79,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  
-  obsidian 
+
   ntfs3g
+  cargo
   brave
   unzip
   wget
