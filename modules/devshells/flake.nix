@@ -26,9 +26,9 @@
         clang = cshells.clang-shell;
 
         # python development environments
-        ml = pyshells.pyml;
-        py = pyshells.pyshell;
-        flask = pyshells.pyflask;
+        pyml = pyshells.pyml;
+        pysh = pyshells.pyshell;
+        pyfl = pyshells.pyflask;
 
         # javascript developement environments
         bun = jsshells.bun;

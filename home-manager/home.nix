@@ -7,7 +7,7 @@
   home.homeDirectory = "/home/harbinger";
 
   imports = [
-  ../modules/terminal/default.nix
+    ../modules/terminal/default.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -41,6 +41,7 @@
     # # "Hello, world!" when run.
     # pkgs.hello
     obsidian
+    sqlite
 
 
     # # It is sometimes useful to fine-tune packages, for example, by applying

@@ -2,13 +2,14 @@
 
 let
   basepkgs = with pkgs; [
-      python313Full
-      virtualenv
-      python313Packages.requests
-      python313Packages.ipython
-      python313Packages.typer
-      python313Packages.rich
+    python313Full
+    virtualenv
+    python313Packages.requests
+    python313Packages.ipython
+    python313Packages.typer
+    python313Packages.rich
   ];
+
 in {
   pyshell = pkgs.mkShell {
     name = "pyshell";
@@ -23,14 +24,14 @@ in {
 
   pyflask = pkgs.mkShell {
     name = "pyflask";
-    buildInputs = basepkgs ++( with pkgs; [
+    buildInputs = basepkgs ++ ( with pkgs; [
       python313Packages.flask
     ]);
     shellHook = ''
       if [[ $SHELL != *"zsh"  ]]; then
         exec zsh
       fi
-      echo "Web dev Python Shell Loaded"
+      echo "Webdev Python Shell Loaded"
     '';
   };
 
