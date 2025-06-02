@@ -16,16 +16,14 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-    in  {
+    in {
       # nixos configuration entry point
       # 'nixos-rebuild switch --flake .#hosthame'
       nixosConfigurations = {
         harbinger = lib.nixosSystem {
           inherit system;
           # main configuration file
-          modules = [
-            ./hosts/laptop/configuration.nix
-          ]; 
+          modules = [ ./hosts/laptop/configuration.nix ];
         };
       };
 
@@ -35,7 +33,7 @@
         harbinger = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           # home-manager configuration file
-          modules = [./home-manager/home.nix];
+          modules = [ ./home-manager/home.nix ];
         };
       };
     };

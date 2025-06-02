@@ -1,7 +1,8 @@
 {
   imports = [
-  ./ghostty.nix
-  ./zellij.nix
-  ./zsh.nix
+    ./alacritty.nix
+    # ./ghostty.nix
+    ./zellij.nix
+    ./zsh.nix
   ];
 }

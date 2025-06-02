@@ -3,6 +3,7 @@
     enable = true;
     initExtra = ''
       source /etc/nixos/scripts/devenv/devshells.sh
+      source /etc/nixos/scripts/os/clean.sh
     '';
     enableCompletion = true;
     autosuggestion.enable = true;
@@ -21,12 +22,12 @@
     history.size = 2000;
     history.ignoreAllDups = true;
     history.path = "$HOME/.zsh_history";
-    history.ignorePatterns = ["rm *" "pkill *" "cp *"];
+    history.ignorePatterns = [ "rm *" "pkill *" "cp *" ];
 
     oh-my-zsh = {
       enable = true;
-      plugins = ["git" "direnv"];
-      theme = "jonathan";  
+      plugins = [ "git" "direnv" ];
+      theme = "jonathan";
     };
   };
 }

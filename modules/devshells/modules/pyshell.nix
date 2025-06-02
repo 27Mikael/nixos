@@ -2,8 +2,11 @@
 
 let
   basepkgs = with pkgs; [
+    # python3 stuff
     python313Full
     virtualenv
+
+    #python313 packages
     python313Packages.requests
     python313Packages.ipython
     python313Packages.typer
@@ -24,9 +27,7 @@ in {
 
   pyflask = pkgs.mkShell {
     name = "pyflask";
-    buildInputs = basepkgs ++ ( with pkgs; [
-      python313Packages.flask
-    ]);
+    buildInputs = basepkgs ++ (with pkgs; [ python313Packages.flask ]);
     shellHook = ''
       if [[ $SHELL != *"zsh"  ]]; then
         exec zsh
@@ -37,7 +38,7 @@ in {
 
   pyml = pkgs.mkShell {
     name = "pyml";
-    buildInputs = basepkgs ++ ( with pkgs; [
+    buildInputs = basepkgs ++ (with pkgs; [
       python313Packages.scikit-learn
       python313Packages.torchvision
       python313Packages.matplotlib

@@ -6,9 +6,7 @@
   home.username = "harbinger";
   home.homeDirectory = "/home/harbinger";
 
-  imports = [
-    ../modules/terminal/default.nix
-  ];
+  imports = [ ../modules/terminal/default.nix ];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -40,9 +38,9 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
+    alacritty
     obsidian
-    sqlite
-
+    vscode
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -66,6 +64,7 @@
       source = ../../../home/harbinger/.config/nvim;
       recursive = true;
     };
+
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.

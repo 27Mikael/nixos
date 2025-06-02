@@ -5,20 +5,16 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-  [ 
+  imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-
-    # Import programming language dependencies
-    # ../../modules/devshells/default.nix
 
     # configuration for xserver
     ../../modules/desktop/gnome.nix
   ];
 
   # Enable flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -60,7 +56,7 @@
   };
 
   # Allowed nix users
-  nix.settings.allowed-users = ["@wheel"];
+  nix.settings.allowed-users = [ "@wheel" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.harbinger = {
@@ -68,7 +64,7 @@
     description = "harbinger";
     extraGroups = [ "networkmanager" "wheel" ];
   };
- 
+
   # setting up direnv
   programs.direnv.nix-direnv.enable = true;
   programs.direnv.enable = true;
@@ -76,25 +72,40 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # fonts 
+  fonts.packages = with pkgs;
+    [ (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Hack" ]; }) ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # Basic Build & System Tools
+    ntfs3g
+    sqlite
+    cargo
+    unzip
+    wget
+    curl
+    gcc
 
-  ntfs3g
-  cargo
-  brave
-  unzip
-  wget
+    # Browsers
+    ladybird
+    brave
 
-  # tools for dev
-  oh-my-zsh
-  ghostty
-  zellij
-  vscode
-  neovim
-  xclip
-  git
-  zsh
+    # Shell and Terminal Tools
+    oh-my-zsh
+    xclip
+    zsh
+
+    # Development Tools
+    neovim
+    git
+    gh
+
+    # LazyVim Runtime Utilities
+    ripgrep
+    nodejs
+    fd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -104,9 +115,9 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  
+
   # I use zsh btw
-  environment.shells = with pkgs; [zsh];
+  environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
 
