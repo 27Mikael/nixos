@@ -15,6 +15,7 @@
       };
 
       cshells = import ./modules/cshells.nix { inherit pkgs; };
+      flutter = import ./modules/flutter.nix { inherit pkgs; };
       pyshells = import ./modules/pyshell.nix { inherit pkgs; };
       jsshells = import ./modules/jsshells.nix { inherit pkgs; };
       delphi = import ./modules/delphi.nix { inherit pkgs; };
@@ -23,10 +24,14 @@
       devShells = {
         ${system} = {
           # TODO: add a default shell so that direnv stops complaining
+          # TODO: shell hooks are not working
 
           # c/cpp development environments
           gcc = cshells.gcc-shell;
           clang = cshells.clang-shell;
+
+          # flutter development environments
+          flutter = flutter.flutter;
 
           # delphi development environments
           del = delphi.delphi;

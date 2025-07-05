@@ -14,13 +14,13 @@ let
   ];
 
 in {
+  # TODO: flask framework based devnev
+  # TODO: django framework based devenv
+  # TODO: machinge learning based devenv
   pyshell = pkgs.mkShell {
     name = "pyshell";
     buildInputs = basepkgs;
     shellHook = ''
-      if [[ $SHELL != *"zsh"  ]]; then
-        exec zsh
-      fi
       echo "🐍 General Python Dev Shell Loaded"
     '';
   };
@@ -29,9 +29,6 @@ in {
     name = "pyflask";
     buildInputs = basepkgs ++ (with pkgs; [ python313Packages.flask ]);
     shellHook = ''
-      if [[ $SHELL != *"zsh"  ]]; then
-        exec zsh
-      fi
       echo "Webdev Python Shell Loaded"
     '';
   };
@@ -52,9 +49,6 @@ in {
       python313Packages.numpy
     ]);
     shellHook = ''
-      if [[ $SHELL != *"zsh"  ]]; then
-        exec zsh
-      fi
       echo "🧠 Machine Learning Python Shell Loaded"
     '';
   };

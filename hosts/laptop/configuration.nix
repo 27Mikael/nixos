@@ -76,10 +76,12 @@
   fonts.packages = with pkgs;
     [ (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Hack" ]; }) ];
 
+  nixpkgs.config.android_sdk.accept_license = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Basic Build & System Tools
+    python3
     ntfs3g
     sqlite
     cargo

@@ -2,6 +2,14 @@
 
 let
   basepkgs = with pkgs; [
+    # TUI/GUI libs
+    libxkbcommon
+    qtcreator
+    gt5.full
+    qttools
+    ncurses
+
+    # general libs
     nlohmann_json
     valgrind
     cmake
@@ -19,9 +27,6 @@ in {
       export CC=gcc
       export CXX=g++
       echo "GCC-based C++ environment"
-      if [[ $SHELL != *"zsh"  ]]; then
-        exec zsh
-      fi
     '';
   };
 
@@ -32,9 +37,6 @@ in {
       export CC=clang
       export CXX=clang++
       echo "Clang-based C++ environment"
-      if [[ $SHELL != *"zsh"  ]];
-        exec zsh
-      fi
     '';
   };
 }
