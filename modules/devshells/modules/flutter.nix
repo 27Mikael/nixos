@@ -1,34 +1,28 @@
 { pkgs }:
 
 let
-  basepkgs = with pkgs; [
-    # android studio 
-    android-studio
-    androidsdk
-
-    # java
-    openjdk17
-    gradle
-
-    # flutter
-    flutter
-  ];
-
+  androidPkgs = pkgs.androidenv.composeAndroidPackages {
+    platformVersions = [ "33" ]; # only API level 33
+    buildToolsVersions = [ "33.0.0" ];
+    includeNDK = true;
+    includeEmulator = false;
+  };
 in {
   flutter = pkgs.mkShell {
-    name = "flutter";
-    buildInputs = basepkgs;
+    name = "flutter-cli-shell";
 
-    ANDROID_SDK_ROOT = "${pkgs.androidsdk}/libexec/android-sdk";
-    ANDROID_NDK_ROOT = "${pkgs.androidsdk}/libexec/android-sdk/ndk-bundle";
+    buildInputs =
+      [ androidPkgs.androidsdk pkgs.openjdk17 pkgs.flutter pkgs.gradle ];
 
+    ANDROID_SDK_ROOT = "${androidPkgs.androidsdk}/libexec/android-sdk";
     JAVA_HOME = "${pkgs.openjdk17}";
-    NIXPKGS_ACCEPT_ANDROID_SDK_LICENSE = 1;
+    NIXPKGS_ACCEPT_ANDROID_SDK_LICENSE = "1";
 
     shellHook = ''
-      echo "Flutter devnev deployed"
-      echo "ANDROID_SDK_ROOT set to $ANDROID_SDK_ROOT"
-      echo "JAVA_HOME set to $JAVA_HOME"
+      echo "Minimal Flutter CLI env with Android SDK"
+      echo "ANDROID_SDK_ROOT = $ANDROID_SDK_ROOT"
+      yes | sdkmanager --licenses || true
     '';
   };
 }
+
