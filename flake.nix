@@ -1,7 +1,7 @@
 {
   inputs = {
     # Nixppkgs
-    nixpkgs.url = "nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Home-manager
     home-manager.url = "github:nix-community/home-manager/release-24.11";
@@ -11,11 +11,12 @@
     nvf.url = "github:notashelf/nvf";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, nvf, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      customNeovim = nvf.lib.neovimConfiguration { inherit pkgs; };
     in {
       # nixos configuration entry point
       # 'nixos-rebuild switch --flake .#hosthame'
@@ -34,6 +35,7 @@
           inherit pkgs;
           # home-manager configuration file
           modules = [ ./home-manager/home.nix ];
+          home.packages = [ customNeovim.neovim ];
         };
       };
     };

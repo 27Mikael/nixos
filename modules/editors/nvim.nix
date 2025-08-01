@@ -1,9 +1,9 @@
 {
   programs.neovim = {
     enable = true;
-    viAlias = true; 
+    viAlias = true;
     vimAlias = true;
-    vimdiffAlias = true;  
+    vimdiffAlias = true;
     defaultEditor = true;
   };
 }

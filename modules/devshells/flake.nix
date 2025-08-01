@@ -17,6 +17,7 @@
 
       cshells = import ./modules/cshells.nix { inherit pkgs; };
       flutter = import ./modules/flutter.nix { inherit pkgs; };
+      java = import ./modules/java.nix { inherit pkgs; };
       pyshells = import ./modules/pyshell.nix { inherit pkgs; };
       jsshells = import ./modules/jsshells.nix { inherit pkgs; };
       delphi = import ./modules/delphi.nix { inherit pkgs; };
@@ -33,6 +34,9 @@
 
           # flutter development environments
           flutter = flutter.flutter;
+
+          # java development environments
+          mc = java.mc_dev;
 
           # delphi development environments
           del = delphi.delphi;
