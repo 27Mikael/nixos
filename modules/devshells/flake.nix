@@ -18,6 +18,7 @@
       cshells = import ./modules/cshells.nix { inherit pkgs; };
       flutter = import ./modules/flutter.nix { inherit pkgs; };
       java = import ./modules/java.nix { inherit pkgs; };
+      play = import ./modules/play.nix { inherit pkgs; };
       pyshells = import ./modules/pyshell.nix { inherit pkgs; };
       jsshells = import ./modules/jsshells.nix { inherit pkgs; };
       delphi = import ./modules/delphi.nix { inherit pkgs; };
@@ -45,6 +46,7 @@
           pyml = pyshells.pyml;
           pysh = pyshells.pyshell;
           pyfl = pyshells.pyflask;
+          play = play.play;
 
           # javascript developement environments
           bun = jsshells.bun;

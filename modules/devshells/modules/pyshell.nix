@@ -5,9 +5,10 @@ let
   python = pkgs.python312Full;
 
   basepkgs = with pkgs; [
-    libstdcxx
     python
+    libstdcxx
     virtualenv
+    playwright-driver.browsers
 
     python312Packages.requests
     python312Packages.ipython
@@ -20,7 +21,7 @@ in {
     name = "pyshell";
     buildInputs = basepkgs;
     shellHook = ''
-      export LD_LIBRARY_PATH=${libstdcxx}/lib:$LD_LIBRARY_PATH
+      export LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zstd}/lib:$LD_LIBRARY_PATH
       echo "🐍 General Python 3.12 Dev Shell Loaded"
       if [ -f .env/bin/activate ]; then
         source .env/bin/activate

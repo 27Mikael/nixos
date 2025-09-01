@@ -11,6 +11,15 @@
 
     # configuration for xserver
     ../../modules/desktop/gnome.nix
+
+    # configurations for nix-ld and nix-alien
+    ../../modules/tools/nix-ld.nix
+
+    # configurations for distrobox
+    ../../modules/virtualization/distrobox.nix
+
+    # nvidia drivers
+    ../../modules/desktop/nvidia.nix
   ];
 
   # Enable flakes
@@ -40,7 +49,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -56,7 +65,7 @@
   };
 
   # Allowed nix users
-  nix.settings.allowed-users = [ "@wheel" ];
+  nix.settings.trusted-users = [ " root" "harbinger" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.harbinger = {
@@ -65,7 +74,18 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  # setting up direnv
+  #***********************************************************************
+  #                                                                      #
+  #                    PROGRAM DECLARATION SECTION                       #
+  #                                                                      #
+  #***********************************************************************
+
+  # I use zsh btw
+  environment.shells = with pkgs; [ zsh ];
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
+
+  # direnv
   programs.direnv.nix-direnv.enable = true;
   programs.direnv.enable = true;
 
@@ -79,6 +99,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # warp
+    warp-terminal
     # Basic Build & System Tools
     openjdk21
     python3
@@ -91,7 +113,6 @@
     gcc
 
     # Browsers
-    ladybird
     brave
 
     # Shell and Terminal Tools
@@ -117,11 +138,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # I use zsh btw
-  environment.shells = with pkgs; [ zsh ];
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
 
   # List services that you want to enable:
 

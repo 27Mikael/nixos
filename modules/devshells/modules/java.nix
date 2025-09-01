@@ -11,7 +11,7 @@ in {
   mc_dev = pkgs.mkShell {
     name = "minecraft-java-mod-devshell";
     buildInputs = basepkgs
-      ++ (with pkgs; [ jetbrains.idea-community prismlauncher ]);
+      ++ (with pkgs; [ jetbrains.idea-community prismlauncher nix-ld ]);
     shellHook = ''
       echo "[✔] Java Minecraft Modding Shell Ready"
 
@@ -22,7 +22,8 @@ in {
       # Java 17 explicitly exposed
       export JAVA_HOME_17=${pkgs.openjdk17}
       echo "Default JAVA_HOME set to: $JAVA_HOME (Java 21)"
-      echo "JAVA_HOME_17 available at: $JAVA_HOME_17"      # 
+      echo "JAVA_HOME_17 available at: $JAVA_HOME_17"
+
     '';
   };
 }

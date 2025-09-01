@@ -12,10 +12,15 @@ in {
     name = "flutter-cli-shell";
 
     buildInputs = [
+      # Android / Flutter tooling
       androidPkgs.androidsdk
       pkgs.openjdk17
       pkgs.flutter
       pkgs.gradle
+      pkgs.clang
+      pkgs.cmake
+      pkgs.ninja
+      pkgs.pkg-config
 
       # Linux desktop Flutter requirements
       pkgs.gtk3
@@ -25,6 +30,16 @@ in {
       pkgs.gnome-themes-extra
       pkgs.fontconfig
       pkgs.freetype
+
+      # Core system libraries for Linux desktop builds
+      pkgs.zlib # provides libz.so
+      pkgs.mesa # OpenGL runtime
+      pkgs.pkg-config
+      pkgs.xorg.libX11
+      pkgs.xorg.libXi
+      pkgs.xorg.libXrandr
+      pkgs.xorg.libXinerama
+      pkgs.xorg.libXcursor
     ];
 
     ANDROID_SDK_ROOT = "${androidPkgs.androidsdk}/libexec/android-sdk";
@@ -34,9 +49,11 @@ in {
     shellHook = ''
       echo "Flutter CLI env with Android SDK + Linux desktop deps"
       echo "ANDROID_SDK_ROOT = $ANDROID_SDK_ROOT"
-
       yes | sdkmanager --licenses || true
 
+
+      export LD_LIBRARY_PATH=/run/current-system/sw/lib:$LD_LIBRARY_PATH
+      export LD_LIBRARY_PATH=/run/current-system/sw/lib:$LD_LIBRARY_PATH
       export XCURSOR_THEME=Adwaita
       export XCURSOR_SIZE=24
       export GTK_THEME=Adwaita:dark
