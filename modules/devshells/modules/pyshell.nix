@@ -5,11 +5,13 @@ let
   python = pkgs.python312Full;
 
   basepkgs = with pkgs; [
+    zstd
     python
     libstdcxx
     virtualenv
     playwright-driver.browsers
 
+    python312Packages.pydantic
     python312Packages.requests
     python312Packages.ipython
     python312Packages.typer
@@ -19,7 +21,8 @@ let
 in {
   pyshell = pkgs.mkShell {
     name = "pyshell";
-    buildInputs = basepkgs;
+    buildInputs = basepkgs
+      ++ (with pkgs; [ python312Packages.pyside6 python312Packages.watchdog ]);
     shellHook = ''
       export LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zstd}/lib:$LD_LIBRARY_PATH
       echo "🐍 General Python 3.12 Dev Shell Loaded"

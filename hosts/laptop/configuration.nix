@@ -99,10 +99,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # minecraft
+    prismlauncher
     # warp
     warp-terminal
     # Basic Build & System Tools
     openjdk21
+    openjdk17
     python3
     ntfs3g
     sqlite
