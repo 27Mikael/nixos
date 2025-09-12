@@ -9,7 +9,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    # configuration for xserver
+    # configuration for desktop environment
     ../../modules/desktop/gnome.nix
 
     # configurations for nix-ld and nix-alien
@@ -108,6 +108,7 @@
     sqlite
     cargo
     unzip
+    zstd
     wget
     curl
     gcc

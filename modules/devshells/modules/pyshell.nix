@@ -45,6 +45,7 @@ in {
     name = "pyml";
     buildInputs = basepkgs ++ (with pkgs; [
       python312Packages.scikit-learn
+      python312Packages.statsmodels
       python312Packages.torchvision
       python312Packages.matplotlib
       python312Packages.jupyterlab
@@ -54,6 +55,7 @@ in {
       python312Packages.seaborn
       python312Packages.pandas
       python312Packages.numpy
+      python312Packages.scipy
     ]);
     shellHook = ''
       export LD_LIBRARY_PATH=${libstdcxx}/lib:$LD_LIBRARY_PATH

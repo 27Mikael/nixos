@@ -20,6 +20,7 @@
       java = import ./modules/java.nix { inherit pkgs; };
       play = import ./modules/play.nix { inherit pkgs; };
       pyshells = import ./modules/pyshell.nix { inherit pkgs; };
+      python = import ./modules/python.nix { inherit pkgs; };
       jsshells = import ./modules/jsshells.nix { inherit pkgs; };
       delphi = import ./modules/delphi.nix { inherit pkgs; };
 
@@ -28,6 +29,7 @@
         ${system} = {
           # TODO: add a default shell so that direnv stops complaining
           # TODO: shell hooks are not working
+          # TODO: define machine learning shell
 
           # c/cpp development environments
           gcc = cshells.gcc-shell;
@@ -43,10 +45,11 @@
           del = delphi.delphi;
 
           # python development environments
+          play = play.play;
           pyml = pyshells.pyml;
+          insight = python.insight;
           pysh = pyshells.pyshell;
           pyfl = pyshells.pyflask;
-          play = play.play;
 
           # javascript developement environments
           bun = jsshells.bun;

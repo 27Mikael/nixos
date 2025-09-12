@@ -61,10 +61,10 @@
   # plain files is through 'home.file'.
   home.file = {
     # manage neovim config
-    #".config/nvim" = {
-    # source = ../../../home/harbinger/.config/nvim;
-    #  recursive = true;
-    #};
+    ".config/nvim" = {
+      source = /home/harbinger/.config/nvim;
+      recursive = true;
+    };
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -94,9 +94,7 @@
   #
   #  /etc/profiles/per-user/harbinger/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    # EDITOR = "nvim";
-  };
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   services = { megasync.enable = true; };
 

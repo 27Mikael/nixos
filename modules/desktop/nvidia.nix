@@ -5,7 +5,7 @@
 
   # NVIDIA closed-source driver
   hardware.nvidia = {
-    package = pkgs.linuxPackages.nvidia_x11;
+    package = pkgs.nvidiaPackages.production_570;
     open = false; # closed-source for GTX 1050
   };
 
@@ -13,6 +13,8 @@
 
   # CUDA packages (optional)
   environment.systemPackages = with pkgs; [
+    nvidia_x11.bin
+    nvidia-settings
     cudaPackages.cudatoolkit
     cudaPackages.nccl
   ];
