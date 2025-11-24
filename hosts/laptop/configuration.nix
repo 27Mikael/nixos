@@ -71,7 +71,7 @@
   users.users.harbinger = {
     isNormalUser = true;
     description = "harbinger";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
   };
 
   #***********************************************************************
@@ -79,6 +79,9 @@
   #                    PROGRAM DECLARATION SECTION                       #
   #                                                                      #
   #***********************************************************************
+
+  #adb setup
+  programs.adb.enable = true;
 
   # I use zsh btw
   environment.shells = with pkgs; [ zsh ];
@@ -101,12 +104,10 @@
   environment.systemPackages = with pkgs; [
     # minecraft
     prismlauncher
-    # warp
-    warp-terminal
     # Basic Build & System Tools
     openjdk21
     openjdk17
-    python3
+    python312
     ntfs3g
     sqlite
     cargo
@@ -131,7 +132,6 @@
 
     # LazyVim Runtime Utilities
     ripgrep
-    nodejs
     fd
   ];
 

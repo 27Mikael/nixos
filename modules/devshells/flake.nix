@@ -48,6 +48,7 @@
           play = play.play;
           pyml = pyshells.pyml;
           insight = python.insight;
+          flask = python.flask;
           pysh = pyshells.pyshell;
           pyfl = pyshells.pyflask;
 

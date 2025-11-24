@@ -1,7 +1,7 @@
 {
   programs.zsh = {
     enable = true;
-    initExtra = ''
+    initContent = ''
       source /etc/nixos/scripts/devenv/devshells.sh
       source /etc/nixos/scripts/os/clean.sh
 
@@ -21,6 +21,8 @@
       test-build = "sudo nixos-rebuild build --flake .#harbinger";
       rehome = "home-manager -f /etc/nixos/home-manager/home.nix switch";
       find = ''$ nix run "github:thiagokokada/nix-alien#nix-alien-lda" -- '';
+      ol =
+        "export PATH=$PATH:/nix/store/7c71915anr5ca0wl2v4rmq2dk38la2a7-ollama-0.12.3/bin";
     };
 
     history.size = 2000;

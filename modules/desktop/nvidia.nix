@@ -13,8 +13,6 @@
 
   # CUDA packages (optional)
   environment.systemPackages = with pkgs; [
-    cudaPackages.cudatoolkit
-    cudaPackages.nccl
   ];
 
   # Blacklist Nouveau

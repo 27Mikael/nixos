@@ -56,7 +56,6 @@
       luajit
       libuv
       ncurses
-      msgpack
       gperf
 
       # --- Fonts ----
