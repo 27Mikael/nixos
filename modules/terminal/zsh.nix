@@ -21,8 +21,10 @@
       test-build = "sudo nixos-rebuild build --flake .#harbinger";
       rehome = "home-manager -f /etc/nixos/home-manager/home.nix switch";
       find = ''$ nix run "github:thiagokokada/nix-alien#nix-alien-lda" -- '';
-      ol =
-        "export PATH=$PATH:/nix/store/7c71915anr5ca0wl2v4rmq2dk38la2a7-ollama-0.12.3/bin";
+      list-system = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
+      delete-system = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations";
+      garbage = "sudo nix-collect-garbage";
+
     };
 
     history.size = 2000;

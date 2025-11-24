@@ -11,7 +11,7 @@
 
     # configuration for desktop environment
     ../../modules/desktop/gnome.nix
-
+    
     # configurations for nix-ld and nix-alien
     ../../modules/tools/nix-ld.nix
 
@@ -102,6 +102,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    ghostty
+    zellij
+    home-manager
     # minecraft
     prismlauncher
     # Basic Build & System Tools
@@ -121,9 +124,7 @@
     brave
 
     # Shell and Terminal Tools
-    oh-my-zsh
     xclip
-    zsh
 
     # Development Tools
     neovim
@@ -132,6 +133,7 @@
 
     # LazyVim Runtime Utilities
     ripgrep
+    nodejs
     fd
   ];
 
