@@ -4,9 +4,14 @@ require("config.lazy")
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.textwidth = 80
+vim.o.termguicolors = true
 vim.opt.formatoptions:append("t")
 vim.opt.breakindent = true -- indent wrapped lines
 vim.opt.showbreak = "↳ " -- visual cue for wrapped lines (optional, pick a glyph or space)
+
+require("lspconfig").pyright.setup({
+  cmd = { "pyright-langserver", "--stdio" },
+})
 
 require("tokyonight").setup({
   style = "storm", -- or "night" / "moon" / "day"

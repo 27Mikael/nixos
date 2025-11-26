@@ -71,7 +71,18 @@ return {
       ---@type lspconfig.options
       servers = {
         -- pyright will be automatically installed with mason and loaded with lspconfig
-        pyright = {},
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = true,
+                typeCheckingMode = "off",
+              },
+            },
+          },
+        },
         -- jdtls = {},
         marksman = {},
       },
@@ -128,6 +139,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
+      highlight = { enable = true },
       ensure_installed = {
         "bash",
         "dart",
@@ -149,20 +161,6 @@ return {
         "yaml",
       },
     },
-  },
-
-  -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
-  -- would overwrite `ensure_installed` with the new value.
-  -- If you'd rather extend the default config, use the code below instead:
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      -- add tsx and treesitter
-      vim.list_extend(opts.ensure_installed, {
-        "tsx",
-        "typescript",
-      })
-    end,
   },
 
   -- the opts function can also be used to change the default opts:
@@ -194,26 +192,4 @@ return {
 
   -- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
   { import = "lazyvim.plugins.extras.lang.json" },
-
-  -- add config for mason-lspconfig
-  {
-    "mason-org/mason-lspconfig",
-    lazy = true,
-    opts = {},
-    dependencies = { { "mason-org/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
-  },
-  -- add any tools you want to have installed below
-  {
-    "mason-org/mason.nvim",
-    opts = {
-      ensure_installed = { "java-debug-adapter", "java-test", "markdownlint-cli2", "markdown-toc" },
-      ui = {
-        icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
-        },
-      },
-    },
-  },
 }
